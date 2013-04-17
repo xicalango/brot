@@ -2,22 +2,25 @@ package xx.brot;
 
 import javax.swing.JFrame;
 
+import xx.brot.factories.BrotFactory;
+import xx.brot.factories.CircleFactory;
+import xx.brot.factories.RandomFactory;
+import xx.brot.factories.SetFnFactoryManager;
+
 public class Main {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		SetFnFactoryManager setFnFactoryManager = new SetFnFactoryManager();
+		setFnFactoryManager.addSetFn(new BrotFactory());
+		setFnFactoryManager.addSetFn(new CircleFactory());
+		setFnFactoryManager.addSetFn(new RandomFactory());
+		
+		MainFrame mf = new MainFrame(setFnFactoryManager);
 
-		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		f.add(new BrotPanel(new MandelbrotSet(100, 2)) );
-//		f.add(new BrotPanel(new CircleSet()));
-		f.pack();
-		
-		f.setVisible(true);
+		mf.setVisible(true);
 		
 		
 	}

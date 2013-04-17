@@ -15,6 +15,14 @@ public class Viewport {
 	
 	private boolean aspectRatio = false;
 
+	public Viewport(Viewport clone) {
+		topX = clone.topX;
+		topY = clone.topY;
+		lowerX = clone.lowerX;
+		lowerY = clone.lowerY;
+		aspectRatio = clone.aspectRatio;
+	}
+	
 	public boolean isAspectRatio() {
 		return aspectRatio;
 	}

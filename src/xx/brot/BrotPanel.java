@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -16,6 +18,42 @@ import javax.swing.JPanel;
 public class BrotPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Viewport defaultViewport = new Viewport(2, 2, -2, -2); 
+	
+	static {
+		defaultViewport.setAspectRatio(true);
+	}
+	
+	private class ResizeListener implements ComponentListener {
+
+		@Override
+		public void componentHidden(ComponentEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void componentMoved(ComponentEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void componentResized(ComponentEvent e) {
+			Dimension size = e.getComponent().getSize();
+			
+			bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+			repaintSet();
+		}
+
+		@Override
+		public void componentShown(ComponentEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 
 	private class MouseZoomListener implements MouseListener, MouseMotionListener {
 
@@ -41,7 +79,7 @@ public class BrotPanel extends JPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(e.getButton() == MouseEvent.BUTTON3) {
-				viewport.changeRect(2, 2, -2, -2);
+				viewport = new Viewport(defaultViewport);
 				repaintSet();
 			}
 		}
@@ -78,7 +116,9 @@ public class BrotPanel extends JPanel {
 	public BrotPanel(SetFn toDrawSet) {
 		this.toDrawSet = toDrawSet;
 		
-		viewport = new Viewport(2, 2, -2, -2);
+		addComponentListener(new ResizeListener());
+		
+		viewport = new Viewport(defaultViewport);
 		viewport.setAspectRatio(true);
 		
 		setPreferredSize(new Dimension(640,480));
@@ -92,9 +132,26 @@ public class BrotPanel extends JPanel {
 		
 		addMouseListener(mzl);
 		addMouseMotionListener(mzl);
+		
+		addComponentListener(new ResizeListener());
 
 	}
 	
+	
+	public SetFn getToDrawSet() {
+		return toDrawSet;
+	}
+
+
+
+	public void setToDrawSet(SetFn toDrawSet) {
+		this.toDrawSet = toDrawSet;
+		viewport = new Viewport(defaultViewport);
+		repaintSet();
+	}
+
+
+
 	public void zoomToRectangle() {
 		if(zoomRectangle == null) {
 			return;
