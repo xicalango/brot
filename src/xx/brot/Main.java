@@ -1,7 +1,5 @@
 package xx.brot;
 
-import javax.swing.JFrame;
-
 import xx.brot.factories.BrotFactory;
 import xx.brot.factories.CircleFactory;
 import xx.brot.factories.RandomFactory;

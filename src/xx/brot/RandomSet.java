@@ -1,12 +1,7 @@
 package xx.brot;
 
-import java.util.Random;
 
 public class RandomSet implements SetFn {
-	
-	public RandomSet() {
-		
-	}
 	
 	@Override
 	public int includes(double x, double y) {

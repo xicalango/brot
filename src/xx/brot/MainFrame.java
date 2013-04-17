@@ -13,6 +13,8 @@ import xx.brot.factories.SetFnFactoryManager;
 
 public class MainFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private BrotPanel brotPanel;
 	private SetFnFactoryManager factoryManager;
 	private SetFnFactory currentSetFn;
