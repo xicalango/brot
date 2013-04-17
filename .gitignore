@@ -1,17 +1,1 @@
 bin
-bin
-CircleSet.class
-Main.class
-MainFrame$1.class
-MainFrame$SetActionListener.class
-MainFrame.class
-MandelbrotSet.class
-NumberUtils.class
-RandomSet.class
-SetFn.class
-Tuple.class
-Viewport.class
-factories
-BrotPanel$MouseZoomListener.class
-BrotPanel$ResizeListener.class
-BrotPanel.class
